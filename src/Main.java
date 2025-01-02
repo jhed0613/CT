@@ -3,36 +3,30 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Array;
 import java.util.*;
 
-
-class car {
-    void start (int a) {
-        System.out.println("car Start");
-    }
-    public void end (int a) {
-        System.out.println("car End");
-
-    }
+interface LambdaAdd{
+    int add(int a, int b);
 }
 
-class vehicle extends car {
-    void honk () {
-        System.out.println("honk");
-    }
-
-    void start(int a) {
-        System.out.println("Vehicle start");
-    }
-
-    public void end (float a){
-        System.out.println(a);
-    }
+interface LambdaPrint{
+    void print();
 }
+
+interface PrintName{
+    void PrintName(String name);
+}
+
 public class Main {
     public static void main(String[] args) {
-        int number = 1234;
-        String a = "1234";
+        // 람다식은 하나의 메서드만 있는 인터페이스(함수형 인터페이스)에서만 사용할 수 있음.
+        LambdaAdd lambdaAdd = (c, d) -> c + d;
+        System.out.println(lambdaAdd.add(24,37));
 
-        System.out.println(number/2);
+        LambdaPrint lambdaPrint = () -> System.out.println("파라미터 없을 때 사용");
+        lambdaPrint.print();
+
+        // 변수가 인터페이스의 매개변수와 같지 않아도 됨.
+        PrintName printName = (a) -> System.out.println("이름은 : " + a);
+        printName.PrintName("김재형");
     }
 }
 
