@@ -1,32 +1,44 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.util.*;
-
-interface LambdaAdd{
-    int add(int a, int b);
-}
-
-interface LambdaPrint{
-    void print();
-}
-
-interface PrintName{
-    void PrintName(String name);
-}
 
 public class Main {
     public static void main(String[] args) {
-        // 람다식은 하나의 메서드만 있는 인터페이스(함수형 인터페이스)에서만 사용할 수 있음.
-        LambdaAdd lambdaAdd = (c, d) -> c + d;
-        System.out.println(lambdaAdd.add(24,37));
+        Scanner sc = new Scanner(System.in);
 
-        LambdaPrint lambdaPrint = () -> System.out.println("파라미터 없을 때 사용");
-        lambdaPrint.print();
+        int n = sc.nextInt(); // 풍선의 개수
+        List<int[]> balloons = new ArrayList<>(); // 풍선 번호와 값 저장
+        for (int i = 1; i <= n; i++) {
+            balloons.add(new int[]{i, sc.nextInt()}); // {풍선 번호, 값}
+        }
 
-        // 변수가 인터페이스의 매개변수와 같지 않아도 됨.
-        PrintName printName = (a) -> System.out.println("이름은 : " + a);
-        printName.PrintName("김재형");
+        List<Integer> result = new ArrayList<>(); // 터지는 순서를 저장할 리스트
+        int idx = 0; // 시작 인덱스
+
+        while (!balloons.isEmpty()) {
+            int[] current = balloons.remove(idx); // 현재 풍선 제거
+            result.add(current[0]); // 터진 풍선 번호 저장
+
+            if (balloons.isEmpty()) {
+                break; // 풍선이 없으면 종료
+            }
+
+            int move = current[1]; // 이동할 값
+
+            // 다음 위치 계산
+            if (move > 0) {
+                idx = (idx + (move - 1)) % balloons.size(); // 오른쪽으로 이동
+            } else {
+                idx = (idx + move + balloons.size()) % balloons.size(); // 왼쪽으로 이동
+            }
+
+            // 인덱스가 음수일 경우 양수로 변환
+            if (idx < 0) {
+                idx += balloons.size();
+            }
+        }
+
+        // 결과 출력
+        for (int num : result) {
+            System.out.print(num + " ");
+        }
     }
 }
-
