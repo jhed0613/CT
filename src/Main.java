@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 //        백준 9012, 괄호 문제
 //        상근이는 문자열에 폭발 문자열을 심어 놓았다. 폭발 문자열이 폭발하면 그 문자는 문자열에서 사라지며, 남은 문자열은 합쳐지게 된다.
 //        폭발은 다음과 같은 과정으로 진행된다.
@@ -13,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+
 public class Main {
     public static void main(String[] args) throws IOException {
         // BufferedReader를 사용하여 입력을 받습니다.
@@ -23,22 +22,22 @@ public class Main {
 
         StringBuilder sb = new StringBuilder();
         int bombLength = c4.length();
+        char lastChar = c4.charAt(bombLength - 1); // 폭발 문자열의 마지막 문자
 
         for (int i = 0; i < strArr.length(); i++) {
-            sb.append(strArr.charAt(i));
+            char currentChar = strArr.charAt(i);
+            sb.append(currentChar);
 
-            // 현재 sb의 길이가 폭발 문자열의 길이 이상일 때만 검사
-            if (sb.length() >= bombLength) {
+            // 현재 문자가 폭발 문자열의 마지막 문자와 일치할 때만 검사
+            if (currentChar == lastChar && sb.length() >= bombLength) {
                 boolean match = true;
                 for (int j = 0; j < bombLength; j++) {
-                    // 폭발 문자열과 일치하지 않으면 break
                     if (sb.charAt(sb.length() - bombLength + j) != c4.charAt(j)) {
                         match = false;
                         break;
                     }
                 }
 
-                // 일치하면 폭발 문자열 부분 제거
                 if (match) {
                     sb.setLength(sb.length() - bombLength);
                 }
@@ -53,4 +52,3 @@ public class Main {
         }
     }
 }
-
