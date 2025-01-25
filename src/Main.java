@@ -2,22 +2,26 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int score = Integer.parseInt(br.readLine());
 
-        if (score >=90)
-            System.out.println("A");
-        else if (score >= 80)
-            System.out.println("B");
-        else if (score >= 70)
-            System.out.println("C");
-        else if (score >= 60)
-            System.out.println("D");
-        else
-            System.out.println("F");
+        String strNum = br.readLine();
+        int num = Integer.parseInt(strNum);
 
+        String strNums = br.readLine();
+        String[] strNumList = strNums.split(" ");
+
+
+        int max = Integer.MIN_VALUE;
+        int min = Integer.MAX_VALUE;
+
+
+        for (int i=0; i<num; i++){
+            int numList = Integer.parseInt(strNumList[i]);
+            max = numList > max ? numList : max;
+            min = numList < min ? numList : min;
+        }
+        System.out.println(min + " " + max);
     }
 }
