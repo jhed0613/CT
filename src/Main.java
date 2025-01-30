@@ -17,17 +17,18 @@ public class Main {
             int n = Integer.parseInt(split[0]);
             int m = Integer.parseInt(split[1]);
 
-            long totalN = 0;
-            long totalM = 0;
-            long answer = 0;
+            long totalN = 1;
+            long totalM = 1;
+            long answer;
 
             int size = n;
             int cSize = 1;
 
             for (int j=0; j<size; j++){
-                totalN += cSize++;
-                totalM += m--;
+                totalN *= cSize++;
+                totalM *= m--;
             }
+
             answer = totalM / totalN;
             System.out.println(answer);
         }
