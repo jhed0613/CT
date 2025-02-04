@@ -1,60 +1,25 @@
 class Solution {
-    public int[] solution(String[] park, String[] routes) {
-        int startI = 0, startJ = 0;
-        int rows = park.length;
-        int cols = park[0].length();
-        String[][] park2 = new String[rows][cols];
+    public int solution(int[][] sizes) {
+        int answer = 0;
 
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                park2[i][j] = String.valueOf(park[i].charAt(j));
-                if (park2[i][j].equals("S")) {
-                    startI = i;
-                    startJ = j;
-                }
+        for (int i=0; i<sizes.length; i++){
+            if (sizes[i][1] > sizes[i][0]){
+                int tmp = sizes[i][1];
+                sizes[i][1] = sizes[i][0];
+                sizes[i][0] = tmp;
             }
         }
 
-        for (int i = 0; i < routes.length; i++) {
-            String[] split = routes[i].split(" ");
-            String direction = split[0];
-            int move = Integer.parseInt(split[1]);
+        int xMax = sizes[0][0];
+        int yMax = sizes[0][1];
 
-            int tempI = startI;
-            int tempJ = startJ;
-            boolean canMove = true;
-
-            for (int j = 0; j < move; j++) {
-                switch (direction) {
-                    case "E":
-                        tempJ++;
-                        break;
-                    case "W":
-                        tempJ--;
-                        break;
-                    case "S":
-                        tempI++;
-                        break;
-                    case "N":
-                        tempI--;
-                        break;
-                }
-
-                if (tempI < 0 || tempI >= rows || tempJ < 0 || tempJ >= cols) {
-                    canMove = false;
-                    break;
-                }
-
-                if (park2[tempI][tempJ].equals("X")) {
-                    canMove = false;
-                    break;
-                }
-            }
-            if (canMove) {
-                startI = tempI;
-                startJ = tempJ;
-            }
+        for (int i=1; i<sizes.length; i++){
+            xMax = Math.max(xMax, sizes[i][0]);
+            yMax = Math.max(yMax, sizes[i][1]);
         }
-        return new int[]{startI, startJ};
+
+        answer = xMax * yMax;
+
+        return answer;
     }
 }

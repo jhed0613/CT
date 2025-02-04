@@ -4,35 +4,21 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Main {
-    static int min = Integer.MAX_VALUE;
-    static int answer = 0;
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int cardCnt = Integer.parseInt(st.nextToken());
-        int m = Integer.parseInt(st.nextToken());
+        // 정상 출력
+        Solution solution = new Solution();
+        System.out.println(solution.solution(new int[][]{{60, 50}, {30, 70}, {60, 30}, {80, 40}}));
 
-        int[] cardList = new int[cardCnt];
-        StringTokenizer st2 = new StringTokenizer(br.readLine());
 
-        for (int i=0; i<cardCnt; i++){
-            cardList[i] = Integer.parseInt(st2.nextToken());
-        }
+        // 정상 출력
+        int[][] arr = new int[][]{{60, 50}, {30, 70}, {60, 30}, {80, 40}};
+        System.out.println(solution.solution(arr));
 
-        for (int i=0; i<cardCnt; i++){
-            for (int j=i+1; j<cardCnt; j++){
-                for (int k=j+1; k<cardCnt; k++){
-                    int sum = cardList[i] + cardList[j] + cardList[k];
-                    int a = m - sum;
 
-                    if (a >= 0 && a < min && sum <= m) {
-                        min = a;
-                        answer = sum;
-                    }
-                }
-            }
-        }
-        System.out.println(answer);
+        // 이건 주소값 출력
+        int[][] arr2 = new int[][]{{60, 50}, {30, 70}, {60, 30}, {80, 40}};
+        System.out.println(arr2);
+
     }
 }
